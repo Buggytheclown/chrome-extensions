@@ -1,0 +1,19 @@
+{
+  "name": "pocket extensions",
+  "description": "description?",
+  "version": "2.0",
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://*.habr.com/*"],
+      "js": ["dist/contentScript/contentScript.js"]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_title": "Extensions",
+    "default_icon": "icon.png",
+    "default_popup": "dist/popup/popup.html"
+  },
+  "manifest_version": 2
+}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <title>Set Page Color Popup</title>
+    <link rel="stylesheet" href="popup.css">
+    <script src="popup.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div data-if="total">
+        <div class="counters text-center">
+            <span data-bind="showCount">0</span>/<span data-bind="total">?</span>
+        </div>
+        <div class="controls">
+            <button class="btn"
+                    data-action="toPrev"
+                    data-attrs="{disabled: count <= 0}"><
+            </button>
+            <button class="btn btn-primary"
+                    data-action="toNext"
+                    data-attrs="{disabled: count >= total - 1}">>
+            </button>
+        </div>
+        <div class="controls">
+            <button class="btn"
+                    data-action="toStart"><<<
+            </button>
+            <button class="btn btn-primary"
+                    data-action="toEnd">>>>
+            </button>
+        </div>
+    </div>
+    <div data-if="!total">
+        <h4 class="text-center">no comments</h4>
+    </div>
+</div>
+</body>
+</html>
