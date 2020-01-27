@@ -13,7 +13,7 @@ class Uren {
 
     [...document.querySelectorAll("[data-attrs]")].forEach(el => {
       const attrs = el.dataset.attrs;
-      const attrsMap = evalWithState(state,attrs);
+      const attrsMap = evalWithState(state, attrs);
 
       Object.entries(attrsMap).forEach(([k, v]) => {
         el[k] = v;
@@ -31,3 +31,5 @@ class Uren {
   }
 }
 
+// TODO: uncomment for test, need more clear way to work with it
+// module.exports = { Uren };
