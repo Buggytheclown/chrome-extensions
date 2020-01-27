@@ -42,3 +42,13 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     controllers[action.type](action);
   }
 });
+
+chrome.runtime.sendMessage(
+  {
+    type: "SET_BADGE",
+    payload: {
+      text: document.querySelectorAll(commetsSelector).length.toString()
+    }
+  },
+  function(response) {}
+);
