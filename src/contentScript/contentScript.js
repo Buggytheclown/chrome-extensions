@@ -12,24 +12,28 @@ const actionCreators = {
 
 log("contentScript was loaded");
 
-const commetsSelector = ".voting-wjt_comments .voting-wjt__counter";
+const commentRatingSelector = ".voting-wjt_comments .voting-wjt__counter";
+const commentSelector = ".comment";
 const controllers = {
   goToComment(action) {
     const count = action.payload;
     if (count < 0) return;
-    const comments = [...document.querySelectorAll(commetsSelector)];
+    const comments = [...document.querySelectorAll(commentSelector)];
     if (count > comments.length - 1) return;
-    comments
-      .sort(
-        (a, b) =>
-          b.textContent.replace("–", "-") - a.textContent.replace("–", "-")
-      )
-      [count].scrollIntoView();
+
+    const targetComment = comments.map(comment => ({
+      comment,
+      rating: comment.querySelector(commentRatingSelector).textContent.replace("–", "-")
+    })).sort((a, b) => b.rating - a.rating)
+        [count]
+
+    targetComment.comment.scrollIntoView({ block: "center" });
+    targetComment.comment.setAttribute("style", "border: 2px solid #1b76c4;padding: 5px;");
   },
   retrieveCommentCount() {
     sendMessage(
       actionCreators.setTotalCount(
-        document.querySelectorAll(commetsSelector).length
+        document.querySelectorAll(commentRatingSelector).length
       )
     );
   }
@@ -47,7 +51,7 @@ chrome.runtime.sendMessage(
   {
     type: "SET_BADGE",
     payload: {
-      text: document.querySelectorAll(commetsSelector).length.toString()
+      text: document.querySelectorAll(commentRatingSelector).length.toString()
     }
   },
   function(response) {}
