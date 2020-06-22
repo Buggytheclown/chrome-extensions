@@ -23,12 +23,13 @@ const controllers = {
 
     const targetComment = comments.map(comment => ({
       comment,
-      rating: comment.querySelector(commentRatingSelector).textContent.replace("–", "-")
+      rating: comment.querySelector(commentRatingSelector) && comment.querySelector(commentRatingSelector).textContent.replace("–", "-")
     })).sort((a, b) => b.rating - a.rating)
         [count]
 
     targetComment.comment.scrollIntoView({ block: "center" });
-    targetComment.comment.setAttribute("style", "border: 2px solid #1b76c4;padding: 5px;");
+    targetComment.comment.setAttribute("style", "border: 2px solid #1b76c4; padding: 5px;");
+    setTimeout(() => targetComment.comment.setAttribute("style", "border: 0px solid #1b76c4; padding: 0px;"), 5000)
   },
   retrieveCommentCount() {
     sendMessage(
